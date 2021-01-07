@@ -2,12 +2,21 @@
 
 ## usersテーブル
 
-| Column         | Type    | Option      | 
-| -------------- | ------- | ----------- | 
-| name           | string  | null: false | 
-| email          | string  | null: false | 
-| password       | string  | null: false | 
-| first_name     | string  | null: false | 
+| Column         | Type    | Option                   | 
+| -------------- | ------- | ------------------------ | 
+| nickname       | string  | null: false, unique: true| 
+| email          | string  | null: false, unique: true| 
+| password       | string  | null: false, unique: true| 
+
+## Association
+
+has_many :items
+has_many :purchase
+has_one :profile
+
+## profilesテーブル
+
+| first_name     | string  | null: false |
 | last_name      | string  | null: false | 
 | first_furigana | string  | null: false | 
 | last_furigana  | string  | null: false | 
@@ -15,8 +24,7 @@
 
 ## Association
 
-has_many :items
-has_many :purchase
+belongs_to :user
 
 ## itemsテーブル
 
