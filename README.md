@@ -4,42 +4,32 @@
 
 ## usersテーブル
 
-| Column         | Type    | Option                   | 
-| -------------- | ------- | ------------------------ | 
-| nickname       | string  | null: false, unique: true| 
-| email          | string  | null: false, unique: true| 
-| password       | string  | null: false, unique: true| 
+| Column                   | Type    | Option                   | 
+| ------------------------ | ------- | ------------------------ | 
+| nickname                 | string  | null: false              | 
+| email                    | string  | null: false, unique: true| 
+| encrypted_password       | string  | null: false, unique: true| 
+| first_name               | string  | null: false              |
+| last_name                | string  | null: false              | 
+| first_furigana           | string  | null: false              | 
+| last_furigana            | string  | null: false              | 
+| birthday                 | date    | null: false              | 
 
 ## Association
 + has_many :items
-+ has_many :purchase
-+ has_one :profile
-
-## profilesテーブル
-
-| Column         | Type    | Option      | 
-| -------------- | ------- | ----------- | 
-| first_name     | string  | null: false |
-| last_name      | string  | null: false | 
-| first_furigana | string  | null: false | 
-| last_furigana  | string  | null: false | 
-| birthday       | date    | null: false | 
-
-## Association
-
-+ belongs_to :user
++ has_many :purchases
 
 ## itemsテーブル
 
 | Column       | Type       | Option            | 
 | ------------ | ---------- | ----------------- | 
 | name         | string     | null: false       | 
-| price        | string     | null: false       | 
+| price        | integer    | null: false       | 
 | text         | text       | null: false       | 
-| category     | string     | null: false       | 
-| state        | string     | null: false       | 
-| ship_from    | string     | null: false       | 
-| ship_day     | string     | null: false       | 
+| category_id  | integer    | null: false       | 
+| state_id     | integer    | null: false       | 
+| ship_from_id | integer    | null: false       | 
+| ship_day_id  | integer    | null: false       | 
 | user         | references | foreign_key: true | 
 
 ## Association
@@ -47,31 +37,21 @@
 + belongs_to :user
 + has_one :purchase
 
-## addressテーブル
+## purchasesテーブル
 
-| Column       | Type    | Option      | 
-| ------------ | ------- | ----------- | 
-| postal_code  | integer | null: false | 
-| prefecture   | string  | null: false | 
-| city         | string  | null: false | 
-| block        | string  | null: false | 
-| building     | string  |             | 
-| phone_number | integer | null: false | 
-
-## Association
-
-+ belongs_to :purchase
-
-## purchase
-
-| Column  | Type       | Option            | 
-| ------- | ---------- | ----------------- | 
-| user    | references | foreign_key: true | 
-| item    | references | foreign_key: true | 
-| address | references | foreign_key: true | 
+| Column       | Type       | Option            | 
+| ------------ | ---------- | ----------------- | 
+| postal_code  | integer    | null: false       | 
+| prefecture   | string     | null: false       | 
+| city         | string     | null: false       | 
+| block        | string     | null: false       | 
+| building     | string     |                   | 
+| phone_number | string     | null: false       | 
+| user         | references | foreign_key: true | 
+| item         | references | foreign_key: true | 
 
 ## Association
 
-+ has_many :users
++ belongs_to :user
 + belongs_to :item
-+ has_one :address
+
