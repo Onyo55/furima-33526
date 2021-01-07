@@ -8,7 +8,7 @@
 | ------------------------ | ------- | ------------------------ | 
 | nickname                 | string  | null: false              | 
 | email                    | string  | null: false, unique: true| 
-| encrypted_password       | string  | null: false, unique: true| 
+| encrypted_password       | string  | null: false              | 
 | first_name               | string  | null: false              |
 | last_name                | string  | null: false              | 
 | first_furigana           | string  | null: false              | 
@@ -21,37 +21,48 @@
 
 ## itemsテーブル
 
-| Column       | Type       | Option            | 
-| ------------ | ---------- | ----------------- | 
-| name         | string     | null: false       | 
-| price        | integer    | null: false       | 
-| text         | text       | null: false       | 
-| category_id  | integer    | null: false       | 
-| state_id     | integer    | null: false       | 
-| ship_from_id | integer    | null: false       | 
-| ship_day_id  | integer    | null: false       | 
-| user         | references | foreign_key: true | 
+| Column        | Type       | Option            | 
+| ------------- | ---------- | ----------------- | 
+| name          | string     | null: false       | 
+| price         | integer    | null: false       | 
+| text          | text       | null: false       | 
+| category_id   | integer    | null: false       | 
+| state_id      | integer    | null: false       | 
+| prefecture_id | integer    | null: false       | 
+| ship_day_id   | integer    | null: false       | 
+| ship_fee_id   | integer    | null: false       | 
+| user          | references | foreign_key: true | 
 
 ## Association
 
 + belongs_to :user
 + has_one :purchase
++ has_one :address
+
+## addressesテーブル
+
+| Column        | Type       | Option            | 
+| ------------- | ---------- | ----------------- | 
+| postal_code   | integer    | null: false       | 
+| prefecture_id | integer    | null: false       | 
+| city          | string     | null: false       | 
+| block         | string     | null: false       | 
+| building      | string     |                   | 
+| phone_number  | string     | null: false       | 
+| item          | references | foreign_key: true | 
+
+## Association
+
++ belongs_to :item
 
 ## purchasesテーブル
 
-| Column       | Type       | Option            | 
-| ------------ | ---------- | ----------------- | 
-| postal_code  | integer    | null: false       | 
-| prefecture   | string     | null: false       | 
-| city         | string     | null: false       | 
-| block        | string     | null: false       | 
-| building     | string     |                   | 
-| phone_number | string     | null: false       | 
-| user         | references | foreign_key: true | 
-| item         | references | foreign_key: true | 
+| Column  | Type       | Option            | 
+| ------- | ---------- | ----------------- | 
+| user    | references | foreign_key: true | 
+| item    | references | foreign_key: true | 
 
 ## Association
 
 + belongs_to :user
 + belongs_to :item
-
