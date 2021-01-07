@@ -1,3 +1,5 @@
+# README
+
 # テーブル設計
 
 ## usersテーブル
@@ -9,13 +11,14 @@
 | password       | string  | null: false, unique: true| 
 
 ## Association
-
-has_many :items
-has_many :purchase
-has_one :profile
++ has_many :items
++ has_many :purchase
++ has_one :profile
 
 ## profilesテーブル
 
+| Column         | Type    | Option      | 
+| -------------- | ------- | ----------- | 
 | first_name     | string  | null: false |
 | last_name      | string  | null: false | 
 | first_furigana | string  | null: false | 
@@ -24,7 +27,7 @@ has_one :profile
 
 ## Association
 
-belongs_to :user
++ belongs_to :user
 
 ## itemsテーブル
 
@@ -41,8 +44,8 @@ belongs_to :user
 
 ## Association
 
-belongs_to :user
-has_one :purchase
++ belongs_to :user
++ has_one :purchase
 
 ## addressテーブル
 
@@ -57,7 +60,7 @@ has_one :purchase
 
 ## Association
 
-belongs_to :purchase
++ belongs_to :purchase
 
 ## purchase
 
@@ -69,6 +72,6 @@ belongs_to :purchase
 
 ## Association
 
-has_many :users
-belongs_to :item
-has_one :address
++ has_many :users
++ belongs_to :item
++ has_one :address
