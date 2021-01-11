@@ -3,6 +3,7 @@ class Item < ApplicationRecord
     validates :name
     validates :price, numericality: {greater_than_or_equal_to:300, less_than_or_equal_to:9999999}
     validates :text
+    validates :image
     with_options numericality: {other_than:1} do
       validates :category_id
       validates :state_id
@@ -14,11 +15,12 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one :purchase
+  has_one_attached :image
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :Prefecture
   belongs_to :ship_day
   belongs_to :ship_fee
   belongs_to :state
-  has_one_attached :image
+  
 end
