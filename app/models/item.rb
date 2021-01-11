@@ -20,4 +20,5 @@ class Item < ApplicationRecord
   belongs_to :ship_day
   belongs_to :ship_fee
   belongs_to :state
+  has_one_attached :image
 end
