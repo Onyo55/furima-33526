@@ -5,4 +5,7 @@ class ShipDay < ActiveHash::Base
     {id:3, '2~3日で発送'}
     {id:4, '4~7日で発送'}
   ]
+
+  include ActineHash::Associations
+  has_many :items
 end
