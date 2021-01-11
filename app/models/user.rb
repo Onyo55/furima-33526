@@ -3,10 +3,14 @@ class User < ApplicationRecord
     validates :nickname
     validates :email,                 uniqueness: { case_sensitive: false }
     validates :password,              format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i }
-    validates :first_name,            format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ }
-    validates :last_name,             format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ }
-    validates :first_furigana,        format: { with: /\A[ァ-ヶ]+\z/ }
-    validates :last_furigana,         format: { with: /\A[ァ-ヶ]+\z/ }
+    with_options format: { with: /\A[ぁ-んァ-ヶ一-龥々]+\z/ } do
+      validates :first_name
+      validates :last_name
+    end
+    with_options format: { with: /\A[ァ-ヶ]+\z/ }
+      validates :first_furigana
+      validates :last_furigana
+    end
     validates :birthday
   end
 
