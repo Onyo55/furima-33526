@@ -86,7 +86,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
       end
-      #以下、passwordのバリデーションのテスト
+      # 以下、passwordのバリデーションのテスト
       it 'passwordが英字のみだと登録できない' do
         @user.password = 'aaaaaa'
         @user.password_confirmation = 'aaaaaa'
