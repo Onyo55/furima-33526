@@ -4,8 +4,14 @@ function price (){
   const addTaxPrice = document.getElementById("add-tax-price")
   const profit = document.getElementById("profit")
 
+  let itemPriceValue = itemPrice.value
+  let addTaxPriceValue = Math.floor(itemPriceValue*0.1)
+  let profitValue = Math.floor(itemPriceValue - addTaxPriceValue)
+  addTaxPrice.innerHTML = addTaxPriceValue
+  profit.innerHTML = profitValue
+  
   itemPrice.addEventListener('input',function(){
-    const itemPriceValue = itemPrice.value
+    let itemPriceValue = itemPrice.value
     let addTaxPriceValue = Math.floor(itemPriceValue*0.1)
     let profitValue = Math.floor(itemPriceValue - addTaxPriceValue)
     addTaxPrice.innerHTML = addTaxPriceValue
