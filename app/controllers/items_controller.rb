@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :item_find_params_id, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :item_find_params_id, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.all.includes(:user).order('created_at DESC')
@@ -23,9 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @item.user.id
   end
 
   def update
@@ -36,7 +34,20 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.id == @item.user.id
+      if @item.destroy
+        redirect_to root_path
+      else
+        render :show
+      end
+    else
+      redirect_to root_path
+    end
+  end
+
   private
+
   def item_find_params_id
     @item = Item.find(params[:id])
   end
