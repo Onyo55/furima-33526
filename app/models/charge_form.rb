@@ -1,6 +1,6 @@
 class ChargeForm
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture_id, :city, :block, :building, :phone_number, :user_id, :item_id
+  attr_accessor :postal_code, :prefecture_id, :city, :block, :building, :phone_number, :user_id, :item_id, :token
 
   with_options presence: true do
     validates :postal_code
@@ -8,6 +8,7 @@ class ChargeForm
     validates :city
     validates :block
     validates :phone_number
+    validates :token
   end
 
   def save
