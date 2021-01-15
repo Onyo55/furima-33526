@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :item_find_item_id
-
+  before_action :authenticate_user!
+  
   def index
     @charge_form = ChargeForm.new
   end
