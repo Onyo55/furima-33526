@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    order = Order.find_by(item_id: @item.id)
-    if (current_user.id == @item.user.id) || !order.nil?
+    if (current_user.id == @item.user.id) || ( @item.order != nil)
       redirect_to root_path 
     end
     @charge_form = ChargeForm.new

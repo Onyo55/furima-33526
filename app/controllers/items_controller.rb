@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :item_find_params_id, only: [:show, :edit, :update, :destroy]
-  before_action :order_all, only: [:index, :show]
 
   def index
     @items = Item.all.includes(:user).order('created_at DESC')
@@ -61,7 +60,4 @@ class ItemsController < ApplicationController
     ).merge(user_id: current_user.id)
   end
 
-  def order_all
-    @orders = Order.all
-  end
 end

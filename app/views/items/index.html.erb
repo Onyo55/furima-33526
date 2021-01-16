@@ -131,7 +131,7 @@
           <%= link_to item_path(item.id) do %>
           <div class='item-img-content'>
             <%= image_tag item.image, class: "item-img" %>
-            <% if ordered?(@orders, item.id) %>
+            <% if item.order != nil %>
               <div class='sold-out'>
                 <span>Sold Out!!</span>
               </div>

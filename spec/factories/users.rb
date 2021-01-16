@@ -9,5 +9,6 @@ FactoryBot.define do
     first_furigana            { 'アアア' }
     last_furigana             { 'イイイ' }
     birthday                  { Faker::Date.in_date_period }
+    id                        {Faker::Number.within(range: 1..10)}
   end
 end

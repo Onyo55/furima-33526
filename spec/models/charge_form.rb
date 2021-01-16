@@ -2,7 +2,11 @@ require 'rails_helper'
 
 RSpec.describe ChargeForm, type: :model do
   before do
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
     @charge_form = FactoryBot.build(:charge_form)
+    @charge_form.user_id = @user.id
+    @charge_form.item_id = @item.id
   end
 
   describe '商品購入機能' do
