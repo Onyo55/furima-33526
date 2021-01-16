@@ -11,6 +11,12 @@ RSpec.describe ChargeForm, type: :model do
         @charge_form.valid?
         expect(@charge_form).to be_valid
       end
+
+      it 'bulidingが空でも登録できる' do
+        @charge_form.building = nil
+        @charge_form.valid?
+        expect(@charge_form).to be_valid
+      end
     end
 
     context '購入ができないとき' do
@@ -50,6 +56,18 @@ RSpec.describe ChargeForm, type: :model do
         expect(@charge_form.errors.full_messages).to include("Token can't be blank")
       end
 
+      it 'user_idが空のときは購入できない' do
+        @charge_form.user_id = nil
+        @charge_form.valid?
+        expect(@charge_form.errors.full_messages).to include("User can't be blank")
+      end
+
+      it 'item_idが空のときは購入できない' do
+        @charge_form.item_id = nil
+        @charge_form.valid?
+        expect(@charge_form.errors.full_messages).to include("Item can't be blank")
+      end
+
       it 'postal_codeはハイフンがなければ購入できない' do
         @charge_form.postal_code = '0000000'
         @charge_form.valid?
@@ -66,6 +84,12 @@ RSpec.describe ChargeForm, type: :model do
         @charge_form.phone_number = '1234123412341'
         @charge_form.valid?
         expect(@charge_form.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it 'prefecture_idは１以外でないと登録できない' do
+        @charge_form.prefecture_id = 1
+        @charge_form.valid?
+        expect(@charge_form.errors.full_messages).to include("Prefecture must be other than 1")
       end
     end
   end
