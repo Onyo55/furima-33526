@@ -12,12 +12,7 @@ class OrdersController < ApplicationController
   def create
     @charge_form = ChargeForm.new(charge_form_params)
     if @charge_form.valid?
-      Payjp.api_key = ENV['PAYJP_SECRET_KEY']
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: charge_form_params[:token],
-        currency: 'jpy'
-      )
+      payjp_charge
       @charge_form.save
       redirect_to root_path
     else
@@ -37,5 +32,14 @@ class OrdersController < ApplicationController
 
   def item_find_item_id
     @item = Item.find(params[:item_id])
+  end
+
+  def payjp_charge
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: charge_form_params[:token],
+      currency: 'jpy'
+      )
   end
 end
