@@ -99,4 +99,3 @@ RSpec.describe ChargeForm, type: :model do
   end
 end
 
-# bundle exec rspec spec/models/charge_form.rb
