@@ -23,7 +23,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @item.user.id
+    if (current_user.id != @item.user.id) || ( @item.order != nil) 
+      redirect_to root_path 
+    end
   end
 
   def update
@@ -59,4 +61,5 @@ class ItemsController < ApplicationController
       :name, :price, :text, :category_id, :state_id, :prefecture_id, :ship_day_id, :ship_fee_id, :image
     ).merge(user_id: current_user.id)
   end
+
 end

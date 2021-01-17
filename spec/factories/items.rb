@@ -8,6 +8,7 @@ FactoryBot.define do
     prefecture_id   { Faker::Number.within(range: 2..48) }
     ship_day_id     { Faker::Number.within(range: 2..4) }
     ship_fee_id     { Faker::Number.within(range: 2..3) }
+    id              {Faker::Number.within(range: 1..10)}
     association :user
 
     after(:build) do |item|
